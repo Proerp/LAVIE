@@ -27,6 +27,7 @@ namespace TotalBase
         public const char charEOT = (char)4;//char.ConvertFromUtf32(4);//04H
         public const char charACK = (char)6;//char.ConvertFromUtf32(6);//06H
         public const char charNACK = (char)21;//char.ConvertFromUtf32(21);//15H
+        public const char charSOH = (char)1;//char.ConvertFromUtf32(4);//01H
 
         public const char charPrintingACK = (char)28;//char.ConvertFromUtf32(21);//1CH
 

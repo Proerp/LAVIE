@@ -70,7 +70,7 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
             this.LavieIndexes = new BindingList<LavieIndexDTO>();
 
-            //this.ionetSocket = new IONetSocket(IPAddress.Parse("10.208.14.100"), 9100, false);
+            this.ionetSocket = new IONetSocket(IPAddress.Parse("10.208.14.100"), 9100, false);
             //this.ioserialPort = new IOSerialPort(GlobalVariables.ComportName, 115200, Parity.None, 8, StopBits.One, false, "MSERIES");
 
             //this.ioserialPort.PropertyChanged += new PropertyChangedEventHandler(ioserialPort_PropertyChanged);
@@ -308,9 +308,9 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
 
         private Thread lavieThread;
-        delegate void propertyChangedThread(object sender, int lavieID);
+        delegate void propertyChangedThread(object sender, int lavieID, string showMessage);
 
-        //private IONetSocket ionetSocket;
+        private IONetSocket ionetSocket;
         //private IOSerialPort ioserialPort;
 
         private bool OnRunning { get; set; }
@@ -319,50 +319,47 @@ namespace TotalSmartCoding.Views.Commons.Lavies
         {
             try
             {
-                //this.ionetSocket.Connect();
+                this.ionetSocket.Connect();
                 //this.ioserialPort.Connect();
 
                 this.OnRunning = true;
-                string curFile = @"c:\temp\PrintGo.txt"; string finishFile = @"c:\temp\Finish.txt";
+                //////string curFile = @"c:\temp\PrintGo.txt"; string finishFile = @"c:\temp\Finish.txt";
 
-                if (!File.Exists(finishFile)) System.IO.File.WriteAllText(finishFile, "");
+                //////if (!File.Exists(finishFile)) System.IO.File.WriteAllText(finishFile, "");
 
                 int lavieIndex = this.LavieIndexes.Where(w => w.PrintedTimes == 0).First().LineIndex; int i = 0;
 
-                this.ABC(this.buttonStart, 0);
+                this.ABC(this.buttonStart, 0, "Connected!"); string receivedFeedback = "";
 
                 while (this.OnRunning)
                 {
-                    if (!File.Exists(curFile) && File.Exists(finishFile) && lavieIndex < (this.LavieIndexes.Count + 1))
+                    if (lavieIndex < (this.LavieIndexes.Count + 1))
                     {
-                        //CHECK PRINTER READY
-                        //this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/S/001/" + "stringMessage" + "/" + GlobalVariables.charEOT);
-                        //this.ioserialPort.WritetoSerial(GlobalVariables.charSTX + "30/30/30/3F/3F" + GlobalVariables.charCR, true);
-                        //this.labelProgress.Text = "SEND OK";
-                        //Thread.Sleep(1000);
-                        //if (this.waitforMSeries())
-                        //{
-                            if (i++ <= 1 || this.lavieAPIs.SystemInfoValidate())
+                        LavieIndexDTO lavieIndexDTO = this.LavieIndexes[lavieIndex - 1];
+
+                        if (this.waitforReady())
+                        {
+                            if (i++ <= 20 || this.lavieAPIs.SystemInfoValidate())
                             {
-                                File.Delete(finishFile);
 
-                                LavieIndexDTO lavieIndexDTO = this.LavieIndexes[lavieIndex - 1]; lavieIndex++;
 
-                                //"PrinterIP=10.208.14.100:9100", 
                                 string[] lines = { "[Label 1]", "Label=LABEL", "Quantity=0", "Dyn01=" + lavieIndexDTO.ItemNumber, "Dyn02=" + lavieIndexDTO.ProductName, "Dyn03=" + lavieIndexDTO.GTIN, "Dyn04=" + lavieIndexDTO.PalletID, "Dyn05=" + lavieIndexDTO.BatchNumber, "Dyn06=" + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy"), "Dyn07=" + ((decimal)lavieIndexDTO.Qty).ToString("N0"), "Dyn08=" + ((decimal)lavieIndexDTO.Layers).ToString("N0"), "Dyn09=" + lavieIndexDTO.GTINBarcode, "Dyn10=" + lavieIndexDTO.Barcode, "Dyn11=" + lavieIndexDTO.SerialID };
                                 //string[] lines = { "[Label 1]", "PrinterIP=101.208.14.100:9100", "Label=LABEL", "Quantity=0", "Dyn01=" + lavieIndexDTO.ItemNumber, "Dyn02=" + lavieIndexDTO.ProductName, "Dyn03=" + lavieIndexDTO.GTIN, "Dyn04=" + lavieIndexDTO.PalletID, "Dyn05=" + lavieIndexDTO.BatchNumber, "Dyn06=" + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy"), "Dyn07=" + ((decimal)lavieIndexDTO.Qty).ToString("N0"), "Dyn08=" + ((decimal)lavieIndexDTO.Layers).ToString("N0"), "Dyn09=" + lavieIndexDTO.GTINBarcode, "Dyn10=" + lavieIndexDTO.Barcode, "Dyn11=" + lavieIndexDTO.SerialID, SystemInfos.GetSystemInfos(true) };
 
-                                System.IO.File.WriteAllLines(curFile, lines);
+                                //System.IO.File.WriteAllLines(curFile, lines);
+                                ////*************SENDING lines TO PRINTER
 
-                                this.lavieAPIs.LavieUpdate(lavieIndexDTO.LavieID);
-                                this.ABC(this, lavieIndexDTO.LavieID);
+                                this.ABC(this, lavieIndexDTO.LavieID, "Printing: No: " + lavieIndexDTO.SerialID + "; Pallet ID: " + lavieIndexDTO.PalletID);
                             }
                             else
                             { throw new Exception(); }
-                        //}
-                    }
+                        }
 
-                    Thread.Sleep(1000);
+                        if (this.waitforPrinted()) { this.lavieAPIs.LavieUpdate(lavieIndexDTO.LavieID); lavieIndexDTO.PrintedTimes = 1; lavieIndex++; }
+                    }
+                    else
+                        this.ABC(this, -1, "Finished!"); //REACH THE LAST ROW => TO FINISH
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception exception)
@@ -372,31 +369,70 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             }
             finally
             {
-                //this.ionetSocket.Disconnect();
+                this.ionetSocket.Disconnect();
                 //this.ioserialPort.Disconnect();
-                this.ABC(this.buttonStop, 0);
+                this.ABC(this.buttonStop, 0, "Disconnected!");
             }
         }
 
-
-        private bool waitforMSeries()
+        private bool waitforReady()
         {
             try
             {
-                //string receivedFeedback = this.ionetSocket.ReadoutStream();
-                string stringReadFrom = "";
-                //this.ioserialPort.ReadoutSerial(false, ref stringReadFrom, "Autonis", 0);
-                this.labelProgress.Text = "M:" + stringReadFrom;
-                if (stringReadFrom == "A")
-                    return true;
-                else return false;
-            }
+                //this.ioserialPort.WritetoSerial(GlobalVariables.charSTX + "30/30/30/3F/3F" + GlobalVariables.charCR, true);
+                this.ionetSocket.WritetoStream(GlobalVariables.charSTX + "/00/0/??/" + GlobalVariables.charCR); string receivedFeedback = "";
+                if (this.waitforMSeries(ref receivedFeedback) && receivedFeedback != null & receivedFeedback != "" && receivedFeedback.Length >= 11)
+                {
 
+                    if (receivedFeedback.ElementAt(0) == GlobalVariables.charSOH && receivedFeedback.ElementAt(10) == GlobalVariables.charCR && receivedFeedback.Substring(1, 4) == "0A00")
+                        if (receivedFeedback.Substring(5, 3) == "999" || receivedFeedback.Substring(5, 3) == "803" || receivedFeedback.Substring(5, 3) == "804")
+                        { this.ABC(this, 0, "Idle"); return true; }
+                        else
+                            this.ABC(this, 0, "ERROR"); //Show ERROR
+                }
+                return false;
+            }
             catch (Exception exception)
             {
                 throw exception;
             }
+        }
 
+        private bool waitforPrinted()
+        {
+            try
+            {
+                //this.ioserialPort.WritetoSerial(GlobalVariables.charSTX + "30/30/30/3F/3F" + GlobalVariables.charCR, true);
+                this.ionetSocket.WritetoStream(GlobalVariables.charSTX + "/00/0/??/" + GlobalVariables.charCR); string receivedFeedback = "";
+                if (this.waitforMSeries(ref receivedFeedback) && receivedFeedback != null & receivedFeedback != "" && receivedFeedback.Length >= 11)
+                {
+
+                    if (receivedFeedback.ElementAt(0) == GlobalVariables.charSOH && receivedFeedback.ElementAt(10) == GlobalVariables.charCR && receivedFeedback.Substring(1, 4) == "0A00")
+                        if (receivedFeedback.Substring(5, 3) == "998" || receivedFeedback.Substring(5, 3) == "991" || receivedFeedback.Substring(5, 3) == "994")
+                        { this.ABC(this, 0, "Idle"); return true; } //Show STATUS ON SEPARATE STATUS LABLE
+                        else
+                            this.ABC(this, 0, "Idle"); //Show ERROR
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+
+        private bool waitforMSeries(ref string receivedFeedback)
+        {
+            try
+            {
+                receivedFeedback = this.ionetSocket.ReadoutStream();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         private void ioserialPort_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -421,12 +457,12 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
 
 
-        private void ABC(object sender, int lavieID)
+        private void ABC(object sender, int lavieID, string showMessage)
         {
             try
             {
                 propertyChangedThread propertyChangedDelegate = new propertyChangedThread(propertyChangedHandler);
-                this.Invoke(propertyChangedDelegate, new object[] { sender, lavieID });
+                this.Invoke(propertyChangedDelegate, new object[] { sender, lavieID, showMessage });
             }
             catch (Exception exception)
             {
@@ -434,7 +470,7 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             }
         }
 
-        private void propertyChangedHandler(object sender, int lavieID)
+        private void propertyChangedHandler(object sender, int lavieID, string showMessage)
         {
             try
             {
