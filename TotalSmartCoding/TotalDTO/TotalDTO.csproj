@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F551A1E-72C8-4CF6-A8A2-5637E138D2AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TotalDTO</RootNamespace>
+    <AssemblyName>TotalDTO</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Equin.ApplicationFramework.BindingListView">
+      <HintPath>..\packages\Equin.ApplicationFramework.BindingListView.1.4.5222.35545\lib\net40-Client\Equin.ApplicationFramework.BindingListView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseDTO.cs" />
+    <Compile Include="BaseWithDetailDTO.cs" />
+    <Compile Include="Commons\BinLocationDTO.cs" />
+    <Compile Include="Commons\CommodityDTO.cs" />
+    <Compile Include="Commons\CustomerDTO.cs" />
+    <Compile Include="Commons\EmployeeDTO.cs" />
+    <Compile Include="Commons\LavieDTO.cs" />
+    <Compile Include="Commons\LavieIndexDTO.cs" />
+    <Compile Include="Commons\PromotionDTO.cs" />
+    <Compile Include="Commons\VoidTypeDTO.cs" />
+    <Compile Include="Commons\WarehouseAdjustmentTypeDTO.cs" />
+    <Compile Include="Commons\WarehouseDTO.cs" />
+    <Compile Include="CustomValidation.cs" />
+    <Compile Include="Generals\ColumnMappingDTO.cs" />
+    <Compile Include="Generals\ReportDTO.cs" />
+    <Compile Include="Generals\UserAccessControlDTO.cs" />
+    <Compile Include="Helpers\AmountDetailDTO.cs" />
+    <Compile Include="Helpers\AmountDTO.cs" />
+    <Compile Include="Helpers\DiscountVATAmountDetailDTO.cs" />
+    <Compile Include="Helpers\DiscountVATAmountDTO.cs" />
+    <Compile Include="Helpers\FreeQuantityDiscountVATAmountDetailDTO.cs" />
+    <Compile Include="Helpers\FreeQuantityDiscountVATAmountDTO.cs" />
+    <Compile Include="Helpers\Interfaces\IAvailableQuantityDetailDTO.cs" />
+    <Compile Include="Helpers\Interfaces\IBatchQuantityDetailDTO.cs" />
+    <Compile Include="Helpers\Interfaces\ILineDetailBinlLocation.cs" />
+    <Compile Include="Helpers\Interfaces\IPriceCategory.cs" />
+    <Compile Include="Helpers\Interfaces\ISearchCustomer.cs" />
+    <Compile Include="Helpers\ListedAmountDiscountVATAmountDetailDTO.cs" />
+    <Compile Include="Helpers\ListedAmountDiscountVATAmountDTO.cs" />
+    <Compile Include="Helpers\QuantityDetailDTO.cs" />
+    <Compile Include="Helpers\QuantityDTO.cs" />
+    <Compile Include="Helpers\VATAmountDetailDTO.cs" />
+    <Compile Include="Helpers\VATAmountDTO.cs" />
+    <Compile Include="Inventories\GoodsIssueDetailDTO.cs" />
+    <Compile Include="Inventories\GoodsIssueDTO.cs" />
+    <Compile Include="Inventories\GoodsReceiptDetailAvailableDTO.cs" />
+    <Compile Include="Inventories\GoodsReceiptDetailDTO.cs" />
+    <Compile Include="Inventories\GoodsReceiptDTO.cs" />
+    <Compile Include="Inventories\PickupDetailDTO.cs" />
+    <Compile Include="Inventories\PickupDTO.cs" />
+    <Compile Include="Inventories\WarehouseAdjustmentDetailDTO.cs" />
+    <Compile Include="Inventories\WarehouseAdjustmentDTO.cs" />
+    <Compile Include="IPrimitiveDTO.cs" />
+    <Compile Include="Productions\BarcodeDTO.cs" />
+    <Compile Include="Productions\BarcodeQueue.cs" />
+    <Compile Include="Productions\BatchDTO.cs" />
+    <Compile Include="Productions\BatchMasterDTO.cs" />
+    <Compile Include="Productions\BatchRepackDTO.cs" />
+    <Compile Include="Productions\CartonDTO.cs" />
+    <Compile Include="Productions\FillingData.cs" />
+    <Compile Include="Productions\PackDTO.cs" />
+    <Compile Include="Productions\PalletDTO.cs" />
+    <Compile Include="Productions\RepackDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\DeliveryAdviceDetailDTO.cs" />
+    <Compile Include="Sales\DeliveryAdviceDTO.cs" />
+    <Compile Include="Sales\SalesOrderDetailDTO.cs" />
+    <Compile Include="Sales\SalesOrderDTO.cs" />
+    <Compile Include="Sales\TransferOrderDetailDTO.cs" />
+    <Compile Include="Sales\TransferOrderDTO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TotalBase\TotalBase.csproj">
+      <Project>{613978fb-2460-436c-a4f4-b98b7ff3dc1d}</Project>
+      <Name>TotalBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalModel\TotalModel.csproj">
+      <Project>{7bcad737-a3d0-4482-b8f5-034844acebe1}</Project>
+      <Name>TotalModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

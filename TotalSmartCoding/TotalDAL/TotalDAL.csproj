@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2009CCDF-1DA6-4A9F-B5DC-E618DAA43881}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TotalDAL</RootNamespace>
+    <AssemblyName>TotalDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\EntityFrameworkExtension.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\BatchStatus.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\BatchType.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\BinLocation.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\AccessControl.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Commodity.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\CommodityCategory.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\CommodityType.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Customer.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\CustomerCategory.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\CustomerType.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Employee.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\FillingLine.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Lavie.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Location.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Territory.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\TransferOrderType.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Warehouse.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\WarehouseAdjustmentType.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Generals\Module.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Generals\OleDb.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Generals\Report.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Generals\UserReference.cs" />
+    <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\Inventory.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsIssue.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsReceipt.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\Pickup.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\WarehouseAdjustment.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Batch.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\BatchMaster.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Carton.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Pack.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Pallet.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Repack.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Sales\DeliveryAdvice.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Sales\SalesOrder.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Sales\TransferOrder.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Temporary.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BaseRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Repositories\Commons\BatchStatusRepository.cs" />
+    <Compile Include="Repositories\Commons\BatchTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\BinLocationRepository.cs" />
+    <Compile Include="Repositories\Commons\CommodityCategoryRepository.cs" />
+    <Compile Include="Repositories\Commons\CommodityRepository.cs" />
+    <Compile Include="Repositories\Commons\CommodityTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\CustomerCategoryRepository.cs" />
+    <Compile Include="Repositories\Commons\CustomerRepository.cs" />
+    <Compile Include="Repositories\Commons\CustomerTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\EmployeeRepository.cs" />
+    <Compile Include="Repositories\Commons\FillingLineRepository.cs" />
+    <Compile Include="Repositories\Commons\LavieRepository.cs" />
+    <Compile Include="Repositories\Commons\LocationRepository.cs" />
+    <Compile Include="Repositories\Commons\TerritoryRepository.cs" />
+    <Compile Include="Repositories\Commons\TransferOrderTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\VoidTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\WarehouseAdjustmentTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\WarehouseRepository.cs" />
+    <Compile Include="Repositories\Generals\ModuleRepository.cs" />
+    <Compile Include="Repositories\Generals\OleDbAPIRepository.cs" />
+    <Compile Include="Repositories\Generals\ReportRepository.cs" />
+    <Compile Include="Repositories\Generals\UserRepository.cs" />
+    <Compile Include="Repositories\GenericAPIRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\GenericWithDetailRepository.cs" />
+    <Compile Include="Repositories\Inventories\GoodsIssueRepository.cs" />
+    <Compile Include="Repositories\Inventories\GoodsReceiptRepository.cs" />
+    <Compile Include="Repositories\Inventories\PickupRepository.cs" />
+    <Compile Include="Repositories\Inventories\WarehouseAdjustmentRepository.cs" />
+    <Compile Include="Repositories\Productions\BatchMasterRepository.cs" />
+    <Compile Include="Repositories\Productions\BatchRepository.cs" />
+    <Compile Include="Repositories\Productions\CartonRepository.cs" />
+    <Compile Include="Repositories\Productions\PackRepository.cs" />
+    <Compile Include="Repositories\Productions\PalletRepository.cs" />
+    <Compile Include="Repositories\Productions\RepackRepository.cs" />
+    <Compile Include="Repositories\Sales\DeliveryAdviceRepository.cs" />
+    <Compile Include="Repositories\Sales\SalesOrderRepository.cs" />
+    <Compile Include="Repositories\Sales\TransferOrderRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TotalBase\TotalBase.csproj">
+      <Project>{613978fb-2460-436c-a4f4-b98b7ff3dc1d}</Project>
+      <Name>TotalBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalCore\TotalCore.csproj">
+      <Project>{505f12ab-8af4-4660-bc9a-51eaf173bc0b}</Project>
+      <Name>TotalCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalModel\TotalModel.csproj">
+      <Project>{7bcad737-a3d0-4482-b8f5-034844acebe1}</Project>
+      <Name>TotalModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

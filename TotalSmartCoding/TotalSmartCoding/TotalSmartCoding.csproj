@@ -1,0 +1,1502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B3B98486-BAF5-41E4-9264-80E6B9ABC055}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TotalSmartCoding</RootNamespace>
+    <AssemblyName>MSeries-Lavie</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>2D-Barcode.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CustomControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CustomControls\CustomControls.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Equin.ApplicationFramework.BindingListView, Version=1.4.5222.35545, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Equin.ApplicationFramework.BindingListView.1.4.5222.35545\lib\net40-Client\Equin.ApplicationFramework.BindingListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Guifreaks.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b9e40ae01dee0076" />
+    <Reference Include="Guifreaks.Navisuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7f6dc13cbca790ea" />
+    <Reference Include="JacksonSoft.CustomTabControl">
+      <HintPath>..\packages\CustomControls\JacksonSoft.CustomTabControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies\Microsoft.ExceptionMessageBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ObjectListView, Version=2.8.1.39329, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ObjectListView-2.8.1\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\APIs\Commons\BatchStatusAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\BatchTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\BinLocationAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CommodityCategoryAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CommodityTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CustomerAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CustomerCategoryAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CustomerTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\EmployeeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\FillingLineAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\LavieAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\LocationAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\TerritoryAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\TransferOrderTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\VoidTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\WarehouseAdjustmentTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\ModuleAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\OleDbAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\ReportAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\UserAPIs.cs" />
+    <Compile Include="Controllers\APIs\Inventories\GoodsIssueAPIs.cs" />
+    <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
+    <Compile Include="Controllers\APIs\Inventories\WarehouseAdjustmentAPIs.cs" />
+    <Compile Include="Controllers\APIs\Productions\BatchMasterAPIs.cs" />
+    <Compile Include="Controllers\APIs\Productions\CartonAPIs.cs" />
+    <Compile Include="Controllers\APIs\Productions\ScannerAPIs.cs" />
+    <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIs.cs" />
+    <Compile Include="Controllers\APIs\Sales\SalesOrderAPIs.cs" />
+    <Compile Include="Controllers\APIs\Sales\TransferOrderAPIs.cs" />
+    <Compile Include="Controllers\Commons\BinLocationController.cs" />
+    <Compile Include="Controllers\Commons\CommodityController.cs" />
+    <Compile Include="Controllers\Commons\CustomerController.cs" />
+    <Compile Include="Controllers\Commons\LaiveController.cs" />
+    <Compile Include="Controllers\Generals\ReportController.cs" />
+    <Compile Include="Controllers\Inventories\GoodsIssueController.cs" />
+    <Compile Include="Controllers\Inventories\PickupController.cs" />
+    <Compile Include="Controllers\Inventories\WarehouseAdjustmentController.cs" />
+    <Compile Include="Controllers\Productions\BatchMasterController.cs" />
+    <Compile Include="Controllers\Productions\RepackController.cs" />
+    <Compile Include="Controllers\Sales\DeliveryAdviceController.cs" />
+    <Compile Include="Controllers\Sales\SalesOrderController.cs" />
+    <Compile Include="Controllers\Sales\TransferOrderController.cs" />
+    <Compile Include="Libraries\AutoMapperConfig.cs" />
+    <Compile Include="Libraries\CommonConfigs.cs" />
+    <Compile Include="Libraries\CommonRegistries.cs" />
+    <Compile Include="Libraries\Communications\Crc16CCITT.cs" />
+    <Compile Include="Libraries\Communications\Crc16CcittBACKUP.cs" />
+    <Compile Include="Libraries\Communications\IOCommon.cs" />
+    <Compile Include="Libraries\Communications\IONetSocket.cs" />
+    <Compile Include="Libraries\Helpers\CommonInterfaces.cs" />
+    <Compile Include="Libraries\Helpers\DataHelpers.cs" />
+    <Compile Include="Libraries\Helpers\ExceptionHandlers.cs" />
+    <Compile Include="Libraries\CommonNinject.cs" />
+    <Compile Include="Libraries\Communications\IOSerialPort.cs" />
+    <Compile Include="Libraries\Helpers\OLVHelpers.cs" />
+    <Compile Include="Configurations\SettingsManager.cs" />
+    <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
+    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIs.cs" />
+    <Compile Include="Controllers\APIs\Productions\BatchAPIs.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ControllersExtensions.cs" />
+    <Compile Include="Controllers\CoreController.cs" />
+    <Compile Include="Controllers\CustomControllerAttribute.cs" />
+    <Compile Include="Controllers\GenericSimpleController.cs" />
+    <Compile Include="Controllers\GenericViewDetailController.cs" />
+    <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
+    <Compile Include="Controllers\Productions\BatchController.cs" />
+    <Compile Include="Controllers\Productions\CodingController.cs" />
+    <Compile Include="Controllers\Productions\CartonController.cs" />
+    <Compile Include="Controllers\Productions\PackController.cs" />
+    <Compile Include="Controllers\Productions\PalletController.cs" />
+    <Compile Include="Controllers\Productions\PrinterController.cs" />
+    <Compile Include="Controllers\Productions\ScannerController.cs" />
+    <Compile Include="Libraries\Helpers\ViewHelpers.cs" />
+    <Compile Include="Libraries\StackedHeaders\Header.cs" />
+    <Compile Include="Libraries\StackedHeaders\IStackedHeaderGenerator.cs" />
+    <Compile Include="Libraries\StackedHeaders\StackedHeaderDecorator.cs" />
+    <Compile Include="Libraries\StackedHeaders\StackedHeaderGenerator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Commons\BinLocationViewModel.cs" />
+    <Compile Include="ViewModels\Commons\CommodityViewModel.cs" />
+    <Compile Include="ViewModels\Commons\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Commons\LavieViewModel.cs" />
+    <Compile Include="ViewModels\Generals\ReportViewModel.cs" />
+    <Compile Include="ViewModels\Helpers\IBaseViewModel.cs" />
+    <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\GoodsIssueViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\GoodsReceiptViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\PickupViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\WarehouseAdjustmentViewModel.cs" />
+    <Compile Include="ViewModels\Productions\BatchMasterViewModel.cs" />
+    <Compile Include="ViewModels\Productions\BatchViewModel.cs" />
+    <Compile Include="ViewModels\Productions\CartonViewModel.cs" />
+    <Compile Include="ViewModels\Productions\PackViewModel.cs" />
+    <Compile Include="ViewModels\Productions\PalletViewModel.cs" />
+    <Compile Include="ViewModels\Productions\RepackViewModel.cs" />
+    <Compile Include="ViewModels\Sales\DeliveryAdviceViewModel.cs" />
+    <Compile Include="ViewModels\Sales\SalesOrderViewModel.cs" />
+    <Compile Include="ViewModels\Sales\TransferOrderViewModel.cs" />
+    <Compile Include="Views\Commons\BinLocations\BinLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\BinLocations\BinLocations.designer.cs">
+      <DependentUpon>BinLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commons\Commodities\Commodities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\Commodities\Commodities.designer.cs">
+      <DependentUpon>Commodities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commons\Customers\Customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\Customers\Customers.designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\CustomExceptionMessageBox.designer.cs">
+      <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commons\CustomInputBox.cs" />
+    <Compile Include="Views\Commons\CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Commons\Lavies\Lavies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\Lavies\Lavies.designer.cs">
+      <DependentUpon>Lavies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Generals\Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Generals\Reports.designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\GoodsIssues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\GoodsIssues.designer.cs">
+      <DependentUpon>GoodsIssues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\WizardDetail.designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsIssues\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceiptDetailAvailables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceiptDetailAvailables.designer.cs">
+      <DependentUpon>GoodsReceiptDetailAvailables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceipts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceipts.designer.cs">
+      <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\Pickups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\Pickups.designer.cs">
+      <DependentUpon>Pickups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardDetail.Designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WarehouseAdjustments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WarehouseAdjustments.designer.cs">
+      <DependentUpon>WarehouseAdjustments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardDetail.designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardUnpack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\WarehouseAdjustments\WizardUnpack.designer.cs">
+      <DependentUpon>WizardUnpack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\BaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\BaseView.Designer.cs">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\BasicView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\BlankView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\BlankView.Designer.cs">
+      <DependentUpon>BlankView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\ColumnMappings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\ColumnMappings.designer.cs">
+      <DependentUpon>ColumnMappings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\ChangePassword.designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\ExcelSheets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\ExcelSheets.designer.cs">
+      <DependentUpon>ExcelSheets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\SearchBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\SearchBarcode.Designer.cs">
+      <DependentUpon>SearchBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\SsrsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\SsrsViewer.Designer.cs">
+      <DependentUpon>SsrsViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\Logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\Logon.designer.cs">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\MasterMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\MasterMDI.Designer.cs">
+      <DependentUpon>MasterMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\TabletMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\TabletMDI.Designer.cs">
+      <DependentUpon>TabletMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\UserAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\UserAdd.Designer.cs">
+      <DependentUpon>UserAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\UserReferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\UserReferences.Designer.cs">
+      <DependentUpon>UserReferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\Batches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\Batches.Designer.cs">
+      <DependentUpon>Batches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\BatchMasters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchMasters.Designer.cs">
+      <DependentUpon>BatchMasters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\BatchMasterWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchMasterWizard.designer.cs">
+      <DependentUpon>BatchMasterWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\BatchRepackWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchRepackWizard.designer.cs">
+      <DependentUpon>BatchRepackWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\BatchWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchWizard.designer.cs">
+      <DependentUpon>BatchWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\QuickView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\QuickView.Designer.cs">
+      <DependentUpon>QuickView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\SmartCoding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\SmartCoding.designer.cs">
+      <DependentUpon>SmartCoding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\DeliveryAdvices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\DeliveryAdvices.designer.cs">
+      <DependentUpon>DeliveryAdvices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\WizardDetail.designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\DeliveryAdvices\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\OptionBatches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\OptionBatches.Designer.cs">
+      <DependentUpon>OptionBatches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\SalesOrders\SalesOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\SalesOrders\SalesOrders.designer.cs">
+      <DependentUpon>SalesOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\SalesOrders\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\SalesOrders\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\TransferOrders\TransferOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\TransferOrders\TransferOrders.designer.cs">
+      <DependentUpon>TransferOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\TransferOrders\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\TransferOrders\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\BinLocations\BinLocations.resx">
+      <DependentUpon>BinLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\Commodities\Commodities.resx">
+      <DependentUpon>Commodities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\Customers\Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\CustomExceptionMessageBox.resx">
+      <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\Lavies\Lavies.resx">
+      <DependentUpon>Lavies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Generals\Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsIssues\GoodsIssues.resx">
+      <DependentUpon>GoodsIssues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsIssues\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsIssues\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\GoodsReceiptDetailAvailables.resx">
+      <DependentUpon>GoodsReceiptDetailAvailables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\GoodsReceipts.resx">
+      <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\Pickups.resx">
+      <DependentUpon>Pickups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\WarehouseAdjustments\WarehouseAdjustments.resx">
+      <DependentUpon>WarehouseAdjustments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\WarehouseAdjustments\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\WarehouseAdjustments\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\WarehouseAdjustments\WizardUnpack.resx">
+      <DependentUpon>WizardUnpack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\BaseView.resx">
+      <DependentUpon>BaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\BasicView.resx">
+      <DependentUpon>BasicView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\BlankView.resx">
+      <DependentUpon>BlankView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\ColumnMappings.resx">
+      <DependentUpon>ColumnMappings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\ExcelSheets.resx">
+      <DependentUpon>ExcelSheets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\SearchBarcode.resx">
+      <DependentUpon>SearchBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\SsrsViewer.resx">
+      <DependentUpon>SsrsViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\Logon.resx">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\MasterMDI.resx">
+      <DependentUpon>MasterMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\TabletMDI.resx">
+      <DependentUpon>TabletMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\UserAdd.resx">
+      <DependentUpon>UserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\UserReferences.resx">
+      <DependentUpon>UserReferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\Batches.resx">
+      <DependentUpon>Batches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchMasters.resx">
+      <DependentUpon>BatchMasters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchMasterWizard.resx">
+      <DependentUpon>BatchMasterWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchRepackWizard.resx">
+      <DependentUpon>BatchRepackWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchWizard.resx">
+      <DependentUpon>BatchWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\QuickView.resx">
+      <DependentUpon>QuickView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\SmartCoding.resx">
+      <DependentUpon>SmartCoding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\DeliveryAdvices\DeliveryAdvices.resx">
+      <DependentUpon>DeliveryAdvices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\DeliveryAdvices\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\DeliveryAdvices\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\OptionBatches.resx">
+      <DependentUpon>OptionBatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\SalesOrders\SalesOrders.resx">
+      <DependentUpon>SalesOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\SalesOrders\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\TransferOrders\TransferOrders.resx">
+      <DependentUpon>TransferOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\TransferOrders\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TotalBase\TotalBase.csproj">
+      <Project>{613978fb-2460-436c-a4f4-b98b7ff3dc1d}</Project>
+      <Name>TotalBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalCore\TotalCore.csproj">
+      <Project>{505f12ab-8af4-4660-bc9a-51eaf173bc0b}</Project>
+      <Name>TotalCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalDAL\TotalDAL.csproj">
+      <Project>{2009ccdf-1da6-4a9f-b5dc-e618daa43881}</Project>
+      <Name>TotalDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalDTO\TotalDTO.csproj">
+      <Project>{2f551a1e-72c8-4cf6-a8a2-5637e138d2af}</Project>
+      <Name>TotalDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalModel\TotalModel.csproj">
+      <Project>{7bcad737-a3d0-4482-b8f5-034844acebe1}</Project>
+      <Name>TotalModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalService\TotalService.csproj">
+      <Project>{94d46fd9-2ae6-4070-9995-891bdf06ee42}</Project>
+      <Name>TotalService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graphicloads-100-Flat-Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3floppy-mount.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368113696_32538.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368113865_132657.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20130106011449193_easyicon_cn_32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-print.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-print-preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-save-as.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-edit-find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-messagebox-warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-trash-empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addressbook-edit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ahmadhania-Spherical-Back.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ahmadhania-Spherical-Down.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Burn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Error.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Error1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Private.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Private1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Warning1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apps-Burn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barcode %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barcode-green-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode-reader.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue2010.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue2010Large.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-recycle-bin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bookmark-add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImage1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImageIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImageIconRight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand_Left.1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_Right.1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_Right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chromatix-Keyboard-Keys-Esc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect %283%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_creating.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_no.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Office-Forward.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Hide-right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Navigate-left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Navigate-right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-6-Import-export.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-6-User-mapping.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-7-Generate-tables.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dario-Arnaez-Genesis-3G-User-Files.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delacro-Id-Recent-Documents.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Orb-Download.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Sleek-Xp-Basic-Ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Soft-Scraps-Document-Preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designcontest-Ecommerce-Business-Money.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit-Text.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit-validated.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\esc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Everaldo-Crystal-Clear-App-key-bindings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fatcow-Farm-Fresh-Key-escape.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Firstfear-Whistlepuff-Documents.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-Drive.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Get-Info-B.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graphicrating-Koloria-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Honeycomb-Barcode-Scanner-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icojam-Onebit-Currency-dollar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconarchive-Red-Orb-Alphabet-Dollar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconshock-Perspective-General-Administrator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconshock-Super-Vista-General-Administrator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\install_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Internet-Connect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Keys.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kyo-Tux-Phuzion-Folder-Blue-Tools.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-dollar-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-Folder-Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-disconnect-icone-6892 %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-edit-find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-go-next-view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-go-previous-view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Mimetypes-text-x-log.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Play-Normal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ramotion-Custom-Mac-Os-Preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recycle-Bin-full.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Robsonbillponte-IRob-Folder-Utilities-Folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Saki-NuoveXT-Actions-ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign-up.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smallsuccess.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Status-security-high.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Status-wallet-open.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop-Normal-Red.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-Key.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Edit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thvg-Wood-Folders-Matte-Utilities.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toolbar Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Treetog-Junior-Folder-user.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpgradeReport_Minus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpgradeReport_Plus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-login.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ToolbarImageStretch.png" />
+    <None Include="Resources\Loader-48.png" />
+    <None Include="Resources\Inventory-maintenance-48.png" />
+    <None Include="Resources\Adjust_48.png" />
+    <None Include="Resources\Warehouse-Full-32.png" />
+    <None Include="Resources\Warehouse-Transfer-32.png" />
+    <None Include="Resources\Warehouse-Transfer-20.png" />
+    <None Include="Resources\Warehouse-Full-20.png" />
+    <None Include="Resources\Warehouse-Transfer-24.png" />
+    <None Include="Resources\Warehouse-Full-24.png" />
+    <None Include="Resources\Icons8-Scanner.ico" />
+    <None Include="Resources\omnii-xt-15-product-series-182.png" />
+    <None Include="Resources\omnii-xt-15.png" />
+    <None Include="Resources\omnii-xt-15-2.png" />
+    <None Include="Resources\scan_barcode-32.png" />
+    <None Include="Resources\free-barcode-scanner-vector.png" />
+    <None Include="Resources\barcode_scan_mobile_hand-32.png" />
+    <None Include="Resources\barcode_scan_mobile_hand-24.png" />
+    <None Include="Resources\barcode_scan_mobile_hand-30.png" />
+    <None Include="Resources\barcode_scan_mobile_hand-28.png" />
+    <None Include="Resources\Portable_barcode_scanner_32.png" />
+    <None Include="Resources\portable_barcode_scanner_32_T.png" />
+    <None Include="Resources\portable_barcode_scanner_32T.png" />
+    <None Include="Resources\Barcode_scan_mobile_hand-28T.png" />
+    <None Include="Resources\barcode_scan_mobile_hand-28T1.png" />
+    <None Include="Resources\Facsimile-Fax.ico" />
+    <None Include="Resources\Designbolts-Free-Shaded-Social-Email.ico" />
+    <None Include="Resources\key-32.png" />
+    <None Include="Resources\JD-17-32.png" />
+    <None Include="Resources\JD-17-48.png" />
+    <None Include="Resources\selected_user-32.png" />
+    <None Include="Resources\Addressbook.ico" />
+    <None Include="Resources\Man-2.ico" />
+    <None Include="Resources\add-user.ico" />
+    <None Include="Resources\remove-user.ico" />
+    <None Include="Resources\add-user1.ico" />
+    <None Include="Resources\Treetog-Junior-User-group.ico" />
+    <None Include="Resources\user-group-icon-red.png" />
+    <None Include="Resources\Edit-clear-ltr.ico" />
+    <None Include="Resources\Ios7-Search.ico" />
+    <None Include="Resources\Zoom-seach.ico" />
+    <None Include="Resources\Next-1.ico" />
+    <None Include="Resources\Identity.ico" />
+    <None Include="Resources\Identity-icon-64.png" />
+    <None Include="Resources\Identity-icon-48.png" />
+    <None Include="Resources\Admin-icon.png" />
+    <None Include="Resources\administrator-icon.png" />
+    <None Include="Resources\administrator-icon-32.png" />
+    <None Include="Resources\Admin-icon-32.png" />
+    <None Include="Resources\user-group-icon-24.png" />
+    <None Include="Resources\warehouse-full-24-x.png" />
+    <None Include="Resources\warehouse-full-24-x24.png" />
+    <None Include="Resources\warehouse-full-24-1-24.png" />
+    <None Include="Resources\Type-icon-24.png" />
+    <None Include="Resources\pallet-24.png" />
+    <None Include="Resources\Martz90-Circle-Addon2-Warning.ico" />
+    <None Include="Resources\Search-barcode.ico" />
+    <None Include="Resources\magnifying-glass.png" />
+    <None Include="Resources\magnifying-glass-48.png" />
+    <None Include="Resources\Search-barcode-512.png" />
+    <None Include="Resources\Search-barcode-32.png" />
+    <None Include="Resources\Login.ico" />
+    <None Include="Resources\Download.ico" />
+    <None Include="Resources\Settings.ico" />
+    <None Include="Resources\letter-a-inside-a-circle.png" />
+    <None Include="Resources\letter-a.png" />
+    <None Include="Resources\letter-b.png" />
+    <None Include="Resources\letter-c.png" />
+    <None Include="Resources\letter-d.png" />
+    <None Include="Resources\letter-e.png" />
+    <None Include="Resources\letter-f.png" />
+    <None Include="Resources\letter-g.png" />
+    <None Include="Resources\letter-h.png" />
+    <None Include="Resources\letter-i.png" />
+    <None Include="Resources\letter-j.png" />
+    <None Include="Resources\letter-l.png" />
+    <None Include="Resources\letter-m.png" />
+    <None Include="Resources\letter-n.png" />
+    <None Include="Resources\letter-o.png" />
+    <None Include="Resources\letter-p.png" />
+    <None Include="Resources\letter-q.png" />
+    <None Include="Resources\letter-r.png" />
+    <None Include="Resources\letter-t.png" />
+    <None Include="Resources\letter-u.png" />
+    <None Include="Resources\letter-v.png" />
+    <None Include="Resources\letter-w.png" />
+    <None Include="Resources\letter-x.png" />
+    <None Include="Resources\letter-y.png" />
+    <None Include="Resources\letter-z.png" />
+    <None Include="Resources\letter-s.png" />
+    <None Include="Resources\letter-k.png" />
+    <None Include="Resources\Numbers-1-icon.png" />
+    <None Include="Resources\o-zero.png" />
+    <None Include="Resources\1-one.png" />
+    <None Include="Resources\o-zero-48.png" />
+    <None Include="Resources\zero.png" />
+    <None Include="Resources\one.png" />
+    <None Include="Resources\two.png" />
+    <None Include="Resources\three.png" />
+    <None Include="Resources\four.png" />
+    <None Include="Resources\five.png" />
+    <None Include="Resources\six.png" />
+    <None Include="Resources\seven.png" />
+    <None Include="Resources\eight.png" />
+    <None Include="Resources\nine.png" />
+    <None Include="Resources\keyboard-key-empty.png" />
+    <None Include="Resources\backspace.png" />
+    <None Include="Resources\backspace_1.png" />
+    <None Include="Resources\backspace_2.png" />
+    <None Include="Resources\hyphen.png" />
+    <None Include="Resources\backspace_3_1.png" />
+    <None Include="Resources\backspace_5_2.png" />
+    <None Include="Resources\backspace_6_2.png" />
+    <None Include="Resources\Void-32.png" />
+    <None Include="Resources\Void-24.png" />
+    <None Include="Resources\Void-16.png" />
+    <None Include="Resources\icons8-esc-30.png" />
+    <None Include="Resources\esc-1-1.png" />
+    <None Include="Resources\Esc32.png" />
+    <None Include="Resources\Icons8-esc-32.png" />
+    <None Include="Resources\Esc32-X.png" />
+    <None Include="Resources\icons8-esc-30-IOS.png" />
+    <None Include="Resources\icons8-esc-32-Ios.png" />
+    <None Include="Resources\icons8-esc-32-IOS-R.png" />
+    <None Include="Resources\canned-food.png" />
+    <None Include="Resources\Navigate-right.ico" />
+    <None Include="Resources\Navigate-left.ico" />
+    <None Include="Resources\Delivery-box.ico" />
+    <None Include="Resources\Carton-1-14-32.png" />
+    <None Include="Resources\Carton-14-32.png" />
+    <None Include="Resources\Close1.ico" />
+    <None Include="Resources\exit-to-app-button-green.png" />
+    <None Include="Resources\exit-to-app-button-magenta.png" />
+    <None Include="Resources\exit-to-app-button-green-24.png" />
+    <None Include="Resources\exit-to-app-button-magenta-24.png" />
+    <None Include="Resources\xxx042-24.png" />
+    <None Include="Resources\calendar24.png" />
+    <None Include="Resources\Calendar-Icon-Yellow.ico" />
+    <None Include="Resources\Energy_24.png" />
+    <None Include="Resources\Calendar-2.ico" />
+    <None Include="Resources\Calendar-icon.ico" />
+    <None Include="Resources\GoUp_16.png" />
+    <None Include="Resources\godown_14.png" />
+    <None Include="Resources\check_Ok_16.png" />
+    <None Include="Resources\check_Circle_20.png" />
+    <None Include="Resources\Empty_20.png" />
+    <None Include="Resources\backspace_l_R_16.png" />
+    <None Include="Resources\ReportAnalytics.png" />
+    <None Include="Resources\Letter-Powerpoint.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-7.ico" />
+    <None Include="Resources\textfile.ico" />
+    <None Include="Resources\text32.png" />
+    <None Include="Resources\Circling-arrows.png" />
+    <Content Include="2D-Barcode.ico" />
+    <Content Include="SmartCodingSolution.ico" />
+    <None Include="Resources\Yellow-cross.ico" />
+    <None Include="Resources\White-Pallet.ico" />
+    <None Include="Resources\Hopstarter-Warning.ico" />
+    <None Include="Resources\fork6.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Palet-02.ico" />
+    <None Include="Resources\Designcontest-Ecommerce-Business-Shipping.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Shipping-1.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Shipping-5.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Palet-01.ico" />
+    <None Include="Resources\Emey87-Trainee-Box-double-tape.ico" />
+    <None Include="Resources\Fuel-icon-32.png" />
+    <None Include="Resources\Fuel-icon-24.png" />
+    <None Include="Resources\gk420t.png" />
+    <None Include="Resources\Avosoft-Toolbar-Printer.ico" />
+    <None Include="Resources\DataLock.ico" />
+    <None Include="Resources\DataLock-24.png" />
+    <None Include="Resources\DataNew.ico" />
+    <None Include="Resources\DataEdit.ico" />
+    <None Include="Resources\DataEdit-1.ico" />
+    <None Include="Resources\DataSave.ico" />
+    <None Include="Resources\DataEsc.ico" />
+    <None Include="Resources\Data-Lock-24.png" />
+    <None Include="Resources\Filter-Delete-32.png" />
+    <None Include="Resources\Edit-clear.ico" />
+    <None Include="Resources\2D-Barcode.ico" />
+    <None Include="Resources\Barcode2D.ico" />
+    <None Include="Resources\Double-Cross.ico" />
+    <None Include="Resources\exit-gray-32.png" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-1.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-11.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-2.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-3.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-0.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-4.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-5.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-6.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-7.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-8.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-9.ico" />
+    <None Include="Resources\Harwen-Simple-RUN.ico" />
+    <None Include="Resources\Chromatix-Keyboard-Keys-Blank-keyboard-key.ico" />
+    <None Include="Resources\9-icon.png" />
+    <None Include="Resources\8-icon.png" />
+    <None Include="Resources\blank-keyboard-key-icon.png" />
+    <None Include="Resources\arrow-left-icon.png" />
+    <None Include="Resources\2-icon.png" />
+    <None Include="Resources\3-icon.png" />
+    <None Include="Resources\4-icon.png" />
+    <None Include="Resources\5-icon.png" />
+    <None Include="Resources\6-icon.png" />
+    <None Include="Resources\7-icon.png" />
+    <None Include="Resources\0-icon.png" />
+    <None Include="Resources\1-icon.png" />
+    <None Include="Resources\0-icon64.png" />
+    <None Include="Resources\1-icon64.png" />
+    <None Include="Resources\1-icon641.png" />
+    <None Include="Resources\1-icon642.png" />
+    <None Include="Resources\2-icon64.png" />
+    <None Include="Resources\3-icon64.png" />
+    <None Include="Resources\4-icon64.png" />
+    <None Include="Resources\5-icon64.png" />
+    <None Include="Resources\6-icon64.png" />
+    <None Include="Resources\7-icon64.png" />
+    <None Include="Resources\8-icon64.png" />
+    <None Include="Resources\9-icon64.png" />
+    <None Include="Resources\8-icon641.png" />
+    <None Include="Resources\blank-key-64.png" />
+    <None Include="Resources\arrow-left-icon64.png" />
+    <None Include="Resources\export-arrow.png" />
+    <None Include="Resources\export-arrow-32.png" />
+    <None Include="Resources\icon.png" />
+    <None Include="Resources\export-arrow-48.png" />
+    <None Include="Resources\Get-Info-B-icon-48.png" />
+    <None Include="Resources\Green-cross.ico" />
+    <None Include="Resources\Carlosjj-Google-Jfk-Maps.ico" />
+    <None Include="Resources\Graphicloads-100-Flat-2-Inside-logout.ico" />
+    <None Include="Resources\Check-Saki-Ok.ico" />
+    <None Include="Resources\Check-Sleek-Ok.ico" />
+    <None Include="Resources\Check-Snowish-Ok.ico" />
+    <None Include="Resources\FullPallet-32.png" />
+    <None Include="Resources\Box-Full.ico" />
+    <None Include="Resources\Box-Full-Kyo.ico" />
+    <None Include="Resources\box-full-40.png" />
+    <None Include="Resources\Box-full-32.png" />
+    <None Include="Resources\Box-full-32S.png" />
+    <None Include="Resources\Box-full-32S1.png" />
+    <None Include="Resources\Box-full-32S2.png" />
+    <None Include="Resources\Add-detail-24.png" />
+    <None Include="Resources\Check-Saki-Cross.ico" />
+    <None Include="Resources\AddNew.ico" />
+    <None Include="Resources\Add-Person.ico" />
+    <None Include="Resources\Add-icon-24.png" />
+    <None Include="Resources\Add-icon-16.png" />
+    <None Include="Resources\Add-continue.ico" />
+    <None Include="Resources\Add-close.ico" />
+    <None Include="Resources\Customer Orange 24.png" />
+    <None Include="Resources\Customer Orange 241.png" />
+    <None Include="Resources\Customer Blue 24.png" />
+    <None Include="Resources\Forklift32.png" />
+    <None Include="Resources\Forklift48.png" />
+    <None Include="Resources\Forklift16.png" />
+    <None Include="Resources\Forklift24.png" />
+    <None Include="Resources\Forklift64.png" />
+    <None Include="Resources\Forklift128.png" />
+    <None Include="Resources\Actions-NOTok-icon.png" />
+    <None Include="Resources\Actions-ok-icon.png" />
+    <None Include="Resources\Cross-UnVerify.png" />
+    <None Include="Resources\edit_tasks-32.png" />
+    <None Include="Resources\Checklist32.png" />
+    <None Include="Resources\Fnd-Oxygen.ico" />
+    <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
+    <None Include="Resources\Land-Play.ico" />
+    <None Include="Resources\palet031.ico" />
+    <None Include="Resources\self2.ico" />
+    <None Include="Resources\self.ico" />
+    <None Include="Resources\Shipping5.ico" />
+    <None Include="Resources\palet04.ico" />
+    <None Include="Resources\if_oil_64502.ico" />
+    <None Include="Resources\if_gas_1055052.ico" />
+    <None Include="Resources\palet-01-png-48.png" />
+    <None Include="Resources\Outline-Fuel.ico" />
+    <None Include="Resources\palet-01-png-32.png" />
+    <None Include="Resources\if_oil_64502.png" />
+    <None Include="Resources\if_oil_64502-24.png" />
+    <None Include="Resources\if_oil_64502-28.png" />
+    <None Include="Resources\if_oil_64502-26.png" />
+    <None Include="Resources\palet-01-png-34.png" />
+    <None Include="Resources\palet-01-png-36.png" />
+    <None Include="Resources\Numbers-5.ico" />
+    <None Include="Resources\Numbers-1.ico" />
+    <None Include="Resources\Numbers-2.ico" />
+    <None Include="Resources\Numbers-3.ico" />
+    <None Include="Resources\Numbers-4.ico" />
+    <None Include="Resources\lock-disabled-icon-24.png" />
+    <None Include="Resources\Play-Normal-16.png" />
+    <None Include="Resources\Play_Normal_Red_16.png" />
+    <None Include="Resources\Stop_Disabled.ico" />
+    <None Include="Resources\Icons8-Exit.ico" />
+    <None Include="Resources\out-icon-16x16.ico" />
+    <None Include="Resources\mktpic69297.png" />
+    <None Include="Resources\sign-out-yellow.png" />
+    <None Include="Resources\sign-out-option.png" />
+    <None Include="Resources\sign-out-magenta.png" />
+    <None Include="Resources\sign-out-black.png" />
+    <None Include="Resources\Sign-out-01.png" />
+    <None Include="Resources\sign-out-gray.png" />
+    <None Include="Resources\sign-out-light-gray.png" />
+    <None Include="Resources\sign-out-very-light-gray.png" />
+    <None Include="Resources\sign-out-light-light-gray.png" />
+    <None Include="Resources\signout-icon.png" />
+    <None Include="Resources\signout-icon-24.png" />
+    <None Include="Resources\RUN-icon.png" />
+    <None Include="Resources\RUN-icon64.png" />
+    <None Include="Resources\letter-a-icon.png" />
+    <None Include="Resources\letter-b-icon.png" />
+    <None Include="Resources\letter-c-icon.png" />
+    <None Include="Resources\letter-d-icon.png" />
+    <None Include="Resources\letter-e-icon.png" />
+    <None Include="Resources\letter-f-icon.png" />
+    <None Include="Resources\letter-g-icon.png" />
+    <None Include="Resources\letter-h-icon.png" />
+    <None Include="Resources\letter-i-icon.png" />
+    <None Include="Resources\letter-j-icon.png" />
+    <None Include="Resources\letter-uppercase-A-icon.png" />
+    <None Include="Resources\letter-uppercase-B-icon.png" />
+    <None Include="Resources\letter-uppercase-C-icon.png" />
+    <None Include="Resources\letter-uppercase-D-icon.png" />
+    <None Include="Resources\letter-uppercase-E-icon.png" />
+    <None Include="Resources\letter-uppercase-F-icon.png" />
+    <None Include="Resources\letter-uppercase-G-icon.png" />
+    <None Include="Resources\letter-uppercase-H-icon.png" />
+    <None Include="Resources\letter-uppercase-I-icon.png" />
+    <None Include="Resources\letter-uppercase-J-icon.png" />
+    <None Include="Resources\letter-uppercase-K-icon.png" />
+    <None Include="Resources\letter-uppercase-L-icon.png" />
+    <None Include="Resources\Sign-Info-icon-48.png" />
+    <None Include="Resources\Kyo-Tux-Phuzion-Sign-Info.ico" />
+    <None Include="Resources\Paomedia-Small-N-Flat-Carton.ico" />
+    <None Include="Resources\Map-pin-20.png" />
+    <None Include="Resources\Red-cross.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-1.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-2.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-3.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-4.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-5.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-6.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-0.ico" />
+    <None Include="Resources\letter-uppercase-M-icon.ico" />
+    <None Include="Resources\letter-uppercase-N-icon.ico" />
+    <None Include="Resources\letter-uppercase-O-icon.ico" />
+    <None Include="Resources\letter-uppercase-P-icon.ico" />
+    <None Include="Resources\PalletBin32.png" />
+    <None Include="Resources\PalletForklift32.png" />
+    <None Include="Resources\PalletForklift32A.png" />
+    <None Include="Resources\Pallet-32.png" />
+    <None Include="Resources\Pallet-32A.png" />
+    <None Include="Resources\pallet-32B.png" />
+    <None Include="Resources\Pallet-32C.png" />
+    <None Include="Resources\Placeholder48.png" />
+    <None Include="Resources\Placeholder64.png" />
+    <None Include="Resources\Placeholder16.png" />
+    <None Include="Resources\Shipping-free-24.png" />
+    <None Include="Resources\Phone-icon-24.png" />
+    <None Include="Resources\Sign_Order_48.png" />
+    <None Include="Resources\Sign_Order_32.png" />
+    <None Include="Resources\japanese-cross.png" />
+    <None Include="Resources\Search-vista.ico" />
+    <None Include="Resources\Letter-uppercase-Q.ico" />
+    <None Include="Resources\Letter-uppercase-R.ico" />
+    <None Include="Resources\Letter-uppercase-S.ico" />
+    <None Include="Resources\Letter-uppercase-T.ico" />
+    <None Include="Resources\Letter-uppercase-U.ico" />
+    <None Include="Resources\Letter-uppercase-V.ico" />
+    <None Include="Resources\Letter-uppercase-W.ico" />
+    <None Include="Resources\Letter-uppercase-X.ico" />
+    <None Include="Resources\Letter-uppercase-Y.ico" />
+    <None Include="Resources\Letter-uppercase-Z.ico" />
+    <None Include="Resources\Number-Keys-0.ico" />
+    <None Include="Resources\Number-Keys-1.ico" />
+    <None Include="Resources\Number-Keys-2.ico" />
+    <None Include="Resources\Number-Keys-3.ico" />
+    <None Include="Resources\Number-Keys-4.ico" />
+    <None Include="Resources\Number-Keys-5.ico" />
+    <None Include="Resources\Number-Keys-6.ico" />
+    <None Include="Resources\Number-Keys-7.ico" />
+    <None Include="Resources\Number-Keys-8.ico" />
+    <None Include="Resources\Number-Keys-9.ico" />
+    <None Include="Resources\Letter-uppercase-At.ico" />
+    <None Include="Resources\Letter-uppercase-Minus.ico" />
+    <None Include="Resources\Letter-uppercase-Blank.ico" />
+    <None Include="Resources\Letter-uppercase--Arrow-left.ico" />
+    <None Include="Resources\ok-Green.ico" />
+    <None Include="Resources\Ok-Saki-Snowish.ico" />
+    <Content Include="Resources\Toolbar Image1.png" />
+    <None Include="Resources\Umar123-Carton.ico" />
+    <None Include="Resources\Truck-24.png" />
+    <None Include="Resources\UnVerify.png" />
+    <None Include="Resources\UnVerifyLightMagenta.png" />
+    <None Include="Resources\UnVerifyVeryLightMagenta.png" />
+    <Content Include="Resources\warning__1_.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
