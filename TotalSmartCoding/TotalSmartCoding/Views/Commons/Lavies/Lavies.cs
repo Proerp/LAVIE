@@ -54,6 +54,8 @@ namespace TotalSmartCoding.Views.Commons.Lavies
         private LavieViewModel lavieViewModel { get; set; }
         private BindingList<LavieIndexDTO> LavieIndexes { get; set; }
 
+        private List<Mstatus> Mstatuses;
+
         public Lavies()
             : base()
         {
@@ -74,6 +76,9 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             //this.ioserialPort = new IOSerialPort(GlobalVariables.ComportName, 115200, Parity.None, 8, StopBits.One, false, "MSERIES");
 
             //this.ioserialPort.PropertyChanged += new PropertyChangedEventHandler(ioserialPort_PropertyChanged);
+
+
+            this.InitMstatuses();
         }
 
         protected override void InitializeTabControl()
@@ -288,6 +293,7 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
 
 
+        #region Thread
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -302,13 +308,25 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             this.OnRunning = false;
         }
 
+        private void Lavies_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (lavieThread != null && lavieThread.IsAlive) { e.Cancel = true; return; }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
 
 
 
 
 
         private Thread lavieThread;
-        delegate void propertyChangedThread(object sender, int lavieID, string showMessage);
+        delegate void propertyChangedThread(object sender, int lavieID, string connectStatus, string showMessage, string cycleStatus);
 
         private IONetSocket ionetSocket;
         //private IOSerialPort ioserialPort;
@@ -319,18 +337,15 @@ namespace TotalSmartCoding.Views.Commons.Lavies
         {
             try
             {
-                this.ionetSocket.Connect();
-                //this.ioserialPort.Connect();
-
-                this.OnRunning = true;
+                this.showStatus(this.buttonStart, 0, "Connecting ...", "", "");
+                this.ionetSocket.Connect(); //this.ioserialPort.Connect();
                 //////string curFile = @"c:\temp\PrintGo.txt"; string finishFile = @"c:\temp\Finish.txt";
-
                 //////if (!File.Exists(finishFile)) System.IO.File.WriteAllText(finishFile, "");
 
+                this.OnRunning = true;
+                this.showStatus(this.buttonStart, 0, "Connected!", "#", "#");
+
                 int lavieIndex = this.LavieIndexes.Where(w => w.PrintedTimes == 0).First().LineIndex; int i = 0;
-
-                this.ABC(this.buttonStart, 0, "Connected!"); string receivedFeedback = "";
-
                 while (this.OnRunning)
                 {
                     if (lavieIndex < (this.LavieIndexes.Count + 1))
@@ -341,37 +356,53 @@ namespace TotalSmartCoding.Views.Commons.Lavies
                         {
                             if (i++ <= 20 || this.lavieAPIs.SystemInfoValidate())
                             {
-
-
-                                string[] lines = { "[Label 1]", "Label=LABEL", "Quantity=0", "Dyn01=" + lavieIndexDTO.ItemNumber, "Dyn02=" + lavieIndexDTO.ProductName, "Dyn03=" + lavieIndexDTO.GTIN, "Dyn04=" + lavieIndexDTO.PalletID, "Dyn05=" + lavieIndexDTO.BatchNumber, "Dyn06=" + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy"), "Dyn07=" + ((decimal)lavieIndexDTO.Qty).ToString("N0"), "Dyn08=" + ((decimal)lavieIndexDTO.Layers).ToString("N0"), "Dyn09=" + lavieIndexDTO.GTINBarcode, "Dyn10=" + lavieIndexDTO.Barcode, "Dyn11=" + lavieIndexDTO.SerialID };
+                                //string[] lines = { "[Label 1]", "Label=LABEL", "Quantity=0", "Dyn01=" + lavieIndexDTO.ItemNumber, "Dyn02=" + lavieIndexDTO.ProductName, "Dyn03=" + lavieIndexDTO.GTIN, "Dyn04=" + lavieIndexDTO.PalletID, "Dyn05=" + lavieIndexDTO.BatchNumber, "Dyn06=" + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy"), "Dyn07=" + ((decimal)lavieIndexDTO.Qty).ToString("N0"), "Dyn08=" + ((decimal)lavieIndexDTO.Layers).ToString("N0"), "Dyn09=" + lavieIndexDTO.GTINBarcode, "Dyn10=" + lavieIndexDTO.Barcode, "Dyn11=" + lavieIndexDTO.SerialID };
                                 //string[] lines = { "[Label 1]", "PrinterIP=101.208.14.100:9100", "Label=LABEL", "Quantity=0", "Dyn01=" + lavieIndexDTO.ItemNumber, "Dyn02=" + lavieIndexDTO.ProductName, "Dyn03=" + lavieIndexDTO.GTIN, "Dyn04=" + lavieIndexDTO.PalletID, "Dyn05=" + lavieIndexDTO.BatchNumber, "Dyn06=" + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy"), "Dyn07=" + ((decimal)lavieIndexDTO.Qty).ToString("N0"), "Dyn08=" + ((decimal)lavieIndexDTO.Layers).ToString("N0"), "Dyn09=" + lavieIndexDTO.GTINBarcode, "Dyn10=" + lavieIndexDTO.Barcode, "Dyn11=" + lavieIndexDTO.SerialID, SystemInfos.GetSystemInfos(true) };
-
                                 //System.IO.File.WriteAllLines(curFile, lines);
-                                ////*************SENDING lines TO PRINTER
 
-                                this.ABC(this, lavieIndexDTO.LavieID, "Printing: No: " + lavieIndexDTO.SerialID + "; Pallet ID: " + lavieIndexDTO.PalletID);
+                                this.writeToBuffer(lavieIndexDTO); ; Thread.Sleep(500);
+                                this.showStatus(this, lavieIndexDTO.LavieID, "#", "No: " + lavieIndexDTO.SerialID + "; Pallet ID: " + lavieIndexDTO.PalletID, "Printing");
                             }
                             else
-                            { throw new Exception(); }
+                            { throw new Exception("Invalid version. Please contact your vendor for more information."); }
                         }
 
                         if (this.waitforPrinted()) { this.lavieAPIs.LavieUpdate(lavieIndexDTO.LavieID); lavieIndexDTO.PrintedTimes = 1; lavieIndex++; }
                     }
                     else
-                        this.ABC(this, -1, "Finished!"); //REACH THE LAST ROW => TO FINISH
+                        this.showStatus(this, -1, "#", "Finished!", "#"); //REACH THE LAST ROW => TO FINISH
                     Thread.Sleep(500);
                 }
             }
             catch (Exception exception)
             {
-                this.labelProgress.Text = exception.Message;
+                this.showStatus(this, 0, "Error", "#", exception.Message);
                 this.buttonStop_Click(this, new EventArgs());
             }
             finally
             {
-                this.ionetSocket.Disconnect();
-                //this.ioserialPort.Disconnect();
-                this.ABC(this.buttonStop, 0, "Disconnected!");
+                this.ionetSocket.Disconnect(); //this.ioserialPort.Disconnect();
+                this.showStatus(this.buttonStop, 0, "Disconnected!", "#", "#");
+            }
+        }
+
+        private bool writeToBuffer(LavieIndexDTO lavieIndexDTO)
+        {
+            try
+            {
+                this.ionetSocket.WritetoStream(GlobalVariables.charSTX + "/0/41/C1/E1/" + GlobalVariables.charETB + "/D/" + lavieIndexDTO.ItemNumber + GlobalVariables.charLF + lavieIndexDTO.ProductName + GlobalVariables.charLF + lavieIndexDTO.GTIN + GlobalVariables.charLF + lavieIndexDTO.PalletID + GlobalVariables.charLF + lavieIndexDTO.BatchNumber + GlobalVariables.charLF + ((DateTime)lavieIndexDTO.ExpirationDate).ToString("dd/MM/yyyy") + GlobalVariables.charLF + ((decimal)lavieIndexDTO.Qty).ToString("N0") + GlobalVariables.charLF + ((decimal)lavieIndexDTO.Layers).ToString("N0") + GlobalVariables.charLF + lavieIndexDTO.GTINBarcode + GlobalVariables.charLF + lavieIndexDTO.Barcode + GlobalVariables.charLF + lavieIndexDTO.SerialID + "/??" + GlobalVariables.charCR); Thread.Sleep(20); string receivedFeedback = "";
+                if (this.waitforMSeries(ref receivedFeedback) && receivedFeedback != null & receivedFeedback != "")
+                {
+                    if (receivedFeedback.Length >= 8 && receivedFeedback.ElementAt(0) == GlobalVariables.charSOH && receivedFeedback.ElementAt(7) == GlobalVariables.charCR && receivedFeedback.Substring(1, 4) == "0A41")
+                        return true;
+                    else
+                        this.showStatus(this, 0, "#", "#", "Error: " + (receivedFeedback.Substring(1, 2) == "0D" ? receivedFeedback.Substring(2, 4) : receivedFeedback.Substring(2, 3))); //Show ERROR
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
             }
         }
 
@@ -386,9 +417,9 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
                     if (receivedFeedback.ElementAt(0) == GlobalVariables.charSOH && receivedFeedback.ElementAt(10) == GlobalVariables.charCR && receivedFeedback.Substring(1, 4) == "0A00")
                         if (receivedFeedback.Substring(5, 3) == "999" || receivedFeedback.Substring(5, 3) == "803" || receivedFeedback.Substring(5, 3) == "804")
-                        { this.ABC(this, 0, "Idle"); return true; }
+                        { this.showStatus(this, 0, "#", "#", "Idle"); return true; }
                         else
-                            this.ABC(this, 0, "ERROR"); //Show ERROR
+                            this.showStatus(this, 0, "#", "#", "ERROR"); //Show ERROR
                 }
                 return false;
             }
@@ -409,9 +440,9 @@ namespace TotalSmartCoding.Views.Commons.Lavies
 
                     if (receivedFeedback.ElementAt(0) == GlobalVariables.charSOH && receivedFeedback.ElementAt(10) == GlobalVariables.charCR && receivedFeedback.Substring(1, 4) == "0A00")
                         if (receivedFeedback.Substring(5, 3) == "998" || receivedFeedback.Substring(5, 3) == "991" || receivedFeedback.Substring(5, 3) == "994")
-                        { this.ABC(this, 0, "Idle"); return true; } //Show STATUS ON SEPARATE STATUS LABLE
+                        { this.showStatus(this, 0, "#", "#", "Idle"); return true; } //Show STATUS ON SEPARATE STATUS LABLE
                         else
-                            this.ABC(this, 0, "Idle"); //Show ERROR
+                            this.showStatus(this, 0, "#", "#", "Show ERROR");
                 }
                 return false;
             }
@@ -420,7 +451,6 @@ namespace TotalSmartCoding.Views.Commons.Lavies
                 throw exception;
             }
         }
-
 
         private bool waitforMSeries(ref string receivedFeedback)
         {
@@ -435,34 +465,16 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             }
         }
 
-        private void ioserialPort_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            try
-            {
-                PropertyInfo prop = this.GetType().GetProperty(e.PropertyName, BindingFlags.Public | BindingFlags.Instance);
-                if (null != prop && prop.CanWrite)
-                    prop.SetValue(this, sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null), null);
-                else
-                    this.labelProgress.Text = e.PropertyName + ": " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString();
-            }
-            catch (Exception exception)
-            {
-                this.labelProgress.Text = exception.Message;
-            }
-        }
 
 
 
-
-
-
-
-        private void ABC(object sender, int lavieID, string showMessage)
+        #region Handle Status
+        private void showStatus(object sender, int lavieID, string connectStatus, string progressStatus, string cycleStatus)
         {
             try
             {
                 propertyChangedThread propertyChangedDelegate = new propertyChangedThread(propertyChangedHandler);
-                this.Invoke(propertyChangedDelegate, new object[] { sender, lavieID, showMessage });
+                this.Invoke(propertyChangedDelegate, new object[] { sender, lavieID, connectStatus, progressStatus, cycleStatus });
             }
             catch (Exception exception)
             {
@@ -470,21 +482,27 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             }
         }
 
-        private void propertyChangedHandler(object sender, int lavieID, string showMessage)
+        private void propertyChangedHandler(object sender, int lavieID, string connectStatus, string progressStatus, string cycleStatus)
         {
             try
             {
                 this.buttonStart.Enabled = !this.OnRunning;
                 this.buttonStop.Enabled = this.OnRunning;
 
-                if (!sender.Equals(this.buttonStart) && !sender.Equals(this.buttonStop))
-                {
-                    this.LavieIndexes.Where(w => w.LavieID == lavieID).Each(batchRepackDTO =>
-                        {
-                            batchRepackDTO.PrintedTimes = 1;
-                            this.labelProgress.Text = "Printing: No: " + batchRepackDTO.SerialID + "; Pallet ID: " + batchRepackDTO.PalletID;
-                        });
-                }
+                if (connectStatus != "#") this.connectStatus.Text = connectStatus;
+                if (cycleStatus != "#") this.cycleStatus.Text = cycleStatus;
+                if (progressStatus != "#") this.progressStatus.Text = progressStatus;
+
+
+                //if (!sender.Equals(this.buttonStart) && !sender.Equals(this.buttonStop))
+                //{
+                //    this.LavieIndexes.Where(w => w.LavieID == lavieID).Each(batchRepackDTO =>
+                //        {
+                //            batchRepackDTO.PrintedTimes = 1;
+                //            this.progressStatus.Text = "Printing: No: " + batchRepackDTO.SerialID + "; Pallet ID: " + batchRepackDTO.PalletID;
+                //        });
+                //}
+
                 return;
             }
             catch (Exception exception)
@@ -493,18 +511,119 @@ namespace TotalSmartCoding.Views.Commons.Lavies
             }
         }
 
-        private void Lavies_FormClosing(object sender, FormClosingEventArgs e)
+        private void ioserialPort_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
             {
-                if (lavieThread != null && lavieThread.IsAlive) { e.Cancel = true; return; }
+                PropertyInfo prop = this.GetType().GetProperty(e.PropertyName, BindingFlags.Public | BindingFlags.Instance);
+                if (null != prop && prop.CanWrite)
+                    prop.SetValue(this, sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null), null);
+                else
+                    this.progressStatus.Text = e.PropertyName + ": " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString();
             }
             catch (Exception exception)
             {
-                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+                this.progressStatus.Text = exception.Message;
             }
         }
 
 
+        private void InitMstatuses()
+        {
+            this.Mstatuses = new List<Mstatus>();
+
+            this.Mstatuses.Add(new Mstatus() { Code = "600", Status = "No contact with cpu3 ACC Status" });
+            this.Mstatuses.Add(new Mstatus() { Code = "601", Status = "Print ACC" });
+            this.Mstatuses.Add(new Mstatus() { Code = "602", Status = "Print Old" });
+            this.Mstatuses.Add(new Mstatus() { Code = "603", Status = "Get queue status from cpu1" });
+            this.Mstatuses.Add(new Mstatus() { Code = "604", Status = "Get extern label from ACC" });
+            this.Mstatuses.Add(new Mstatus() { Code = "605", Status = "Get length from ACC (special)" });
+            this.Mstatuses.Add(new Mstatus() { Code = "609", Status = "Soft Reset" });
+            this.Mstatuses.Add(new Mstatus() { Code = "700", Status = "No contact with cpu2" });
+            this.Mstatuses.Add(new Mstatus() { Code = "701", Status = "Print button" });
+            this.Mstatuses.Add(new Mstatus() { Code = "702", Status = "Test button" });
+            this.Mstatuses.Add(new Mstatus() { Code = "703", Status = "Start calibrate ribbon, label or length" });
+            this.Mstatuses.Add(new Mstatus() { Code = "704", Status = "Stop calibrate ribbon, label or length" });
+            this.Mstatuses.Add(new Mstatus() { Code = "705", Status = "Menu active. Offline" });
+            this.Mstatuses.Add(new Mstatus() { Code = "706", Status = "Menu inactive. Online" });
+            this.Mstatuses.Add(new Mstatus() { Code = "707", Status = "Read label length" });
+            this.Mstatuses.Add(new Mstatus() { Code = "708", Status = "System reset" });
+            this.Mstatuses.Add(new Mstatus() { Code = "709", Status = "Soft reset" });
+            this.Mstatuses.Add(new Mstatus() { Code = "710", Status = "Receive and set EEPROM variables" });
+            this.Mstatuses.Add(new Mstatus() { Code = "711", Status = "Receive and set Label number" });
+            this.Mstatuses.Add(new Mstatus() { Code = "712", Status = "Receive ACC var. and trans cpu3" });
+            this.Mstatuses.Add(new Mstatus() { Code = "713", Status = "Receive CPU1 Constants" });
+            this.Mstatuses.Add(new Mstatus() { Code = "714", Status = "Receive and set real time clock" });
+            this.Mstatuses.Add(new Mstatus() { Code = "715", Status = "Receive and set counters to zero" });
+            this.Mstatuses.Add(new Mstatus() { Code = "716", Status = "Receive, set EEPROM var. Eth. Reset" });
+            this.Mstatuses.Add(new Mstatus() { Code = "717", Status = "Reset Ethernet" });
+            this.Mstatuses.Add(new Mstatus() { Code = "720", Status = "Transmit EEPROM variables" });
+            this.Mstatuses.Add(new Mstatus() { Code = "721", Status = "Transmit Label number" });
+            this.Mstatuses.Add(new Mstatus() { Code = "722", Status = "Transmit ACC variables" });
+            this.Mstatuses.Add(new Mstatus() { Code = "723", Status = "Transmit Program versions" });
+            this.Mstatuses.Add(new Mstatus() { Code = "724", Status = "Transmit real clock times" });
+            this.Mstatuses.Add(new Mstatus() { Code = "725", Status = "Transmit label counters" });
+            this.Mstatuses.Add(new Mstatus() { Code = "726", Status = "Transmit languages" });
+            this.Mstatuses.Add(new Mstatus() { Code = "730", Status = "Read settings from Ethernet" });
+            this.Mstatuses.Add(new Mstatus() { Code = "731", Status = "Test print selected label" });
+            this.Mstatuses.Add(new Mstatus() { Code = "801", Status = "Printhead up" });
+            this.Mstatuses.Add(new Mstatus() { Code = "802", Status = "Printhead overheated" });
+            this.Mstatuses.Add(new Mstatus() { Code = "803", Status = "Label low" });
+            this.Mstatuses.Add(new Mstatus() { Code = "804", Status = "Ribbon low" });
+            this.Mstatuses.Add(new Mstatus() { Code = "805", Status = "No labels" });
+            this.Mstatuses.Add(new Mstatus() { Code = "806", Status = "No ribbon" });
+            this.Mstatuses.Add(new Mstatus() { Code = "807", Status = "5 volt to printhead is missing" });
+            this.Mstatuses.Add(new Mstatus() { Code = "808", Status = "24 volt to printhead is missing" });
+            this.Mstatuses.Add(new Mstatus() { Code = "809", Status = "36 volt to printhead is missing" });
+            this.Mstatuses.Add(new Mstatus() { Code = "810", Status = "Applicator error" });
+            this.Mstatuses.Add(new Mstatus() { Code = "811", Status = "Label control" });
+            this.Mstatuses.Add(new Mstatus() { Code = "812", Status = "Barcode not readable" });
+            this.Mstatuses.Add(new Mstatus() { Code = "814", Status = "The printhead is down (film printer)" });
+            this.Mstatuses.Add(new Mstatus() { Code = "815", Status = "The printhead is up (film printer)" });
+            this.Mstatuses.Add(new Mstatus() { Code = "816", Status = "No power to printer" });
+            this.Mstatuses.Add(new Mstatus() { Code = "817", Status = "Door control" });
+            this.Mstatuses.Add(new Mstatus() { Code = "818", Status = "Emergency control" });
+            this.Mstatuses.Add(new Mstatus() { Code = "821", Status = "Pneumatic Door" });
+            this.Mstatuses.Add(new Mstatus() { Code = "822", Status = "No Air Pressure" });
+            this.Mstatuses.Add(new Mstatus() { Code = "823", Status = "Tag Not Writable" });
+            this.Mstatuses.Add(new Mstatus() { Code = "824", Status = "(Special for Tetra Pak)" });
+            this.Mstatuses.Add(new Mstatus() { Code = "825", Status = "ACC Test Mode" });
+            this.Mstatuses.Add(new Mstatus() { Code = "826", Status = "Warning Product hit control" });
+            this.Mstatuses.Add(new Mstatus() { Code = "827", Status = "Error Product hit control" });
+            this.Mstatuses.Add(new Mstatus() { Code = "828", Status = "Apply Timeout" });
+            this.Mstatuses.Add(new Mstatus() { Code = "829", Status = "Part Pallet (if offline setup = 989)**" });
+            this.Mstatuses.Add(new Mstatus() { Code = "830", Status = "Bad applicator type" });
+            this.Mstatuses.Add(new Mstatus() { Code = "831", Status = "Peel roller down" });
+            this.Mstatuses.Add(new Mstatus() { Code = "832", Status = "Cover off" });
+            this.Mstatuses.Add(new Mstatus() { Code = "949", Status = "Waiting for label positioning" });
+            this.Mstatuses.Add(new Mstatus() { Code = "950", Status = "Dynamic queue empty" });
+            this.Mstatuses.Add(new Mstatus() { Code = "951", Status = "Dynamic / Bitmap queue full" });
+            this.Mstatuses.Add(new Mstatus() { Code = "952", Status = "Dynamic queue calc. bitmap empty" });
+            this.Mstatuses.Add(new Mstatus() { Code = "989", Status = "Offline (if setup = 989)**" });
+            this.Mstatuses.Add(new Mstatus() { Code = "990", Status = "Calculation in progress" });
+            this.Mstatuses.Add(new Mstatus() { Code = "991", Status = "Label printed" });
+            this.Mstatuses.Add(new Mstatus() { Code = "992", Status = "Cylinder out" });
+            this.Mstatuses.Add(new Mstatus() { Code = "993", Status = "Get label in PC" });
+            this.Mstatuses.Add(new Mstatus() { Code = "994", Status = "Application in progress" });
+            this.Mstatuses.Add(new Mstatus() { Code = "997", Status = "Reset in progress" });
+            this.Mstatuses.Add(new Mstatus() { Code = "998", Status = "Printing in progress" });
+            this.Mstatuses.Add(new Mstatus() { Code = "999", Status = "Ok, idle" });
+        }
+
+        private string GetMstatus(string code)
+        {
+            Mstatus mstatus = this.Mstatuses.Where(w => w.Code == code).First();
+            if (mstatus != null) return mstatus.Status; else return "Unknow!";
+        }
+        #endregion Handle Status
+
+        #endregion Thread
+    }
+
+
+    public class  Mstatus
+    {
+        public string Code {get; set;}
+        public string Status { get; set; }
     }
 }

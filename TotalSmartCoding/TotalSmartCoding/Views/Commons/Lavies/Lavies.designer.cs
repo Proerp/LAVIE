@@ -49,7 +49,9 @@
             this.buttonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.labelProgress = new System.Windows.Forms.ToolStripLabel();
+            this.connectStatus = new System.Windows.Forms.ToolStripLabel();
+            this.progressStatus = new System.Windows.Forms.ToolStripLabel();
+            this.cycleStatus = new System.Windows.Forms.ToolStripLabel();
             this.panelCenter = new System.Windows.Forms.Panel();
             this.layoutTop = new System.Windows.Forms.TableLayoutPanel();
             this.label13 = new System.Windows.Forms.Label();
@@ -103,7 +105,9 @@
             this.buttonStop,
             this.toolStripButton2,
             this.toolStripSeparator1,
-            this.labelProgress});
+            this.connectStatus,
+            this.progressStatus,
+            this.cycleStatus});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
             this.toolStripChildForm.Size = new System.Drawing.Size(951, 39);
@@ -156,10 +160,26 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
-            // labelProgress
+            // connectStatus
             // 
-            this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(0, 36);
+            this.connectStatus.AutoSize = false;
+            this.connectStatus.Name = "connectStatus";
+            this.connectStatus.Size = new System.Drawing.Size(96, 36);
+            this.connectStatus.Text = "        ";
+            // 
+            // progressStatus
+            // 
+            this.progressStatus.AutoSize = false;
+            this.progressStatus.Name = "progressStatus";
+            this.progressStatus.Size = new System.Drawing.Size(336, 36);
+            this.progressStatus.Text = "        ";
+            // 
+            // cycleStatus
+            // 
+            this.cycleStatus.Name = "cycleStatus";
+            this.cycleStatus.Size = new System.Drawing.Size(31, 36);
+            this.cycleStatus.Tag = "        ";
+            this.cycleStatus.Text = "        ";
             // 
             // panelCenter
             // 
@@ -169,10 +189,10 @@
             this.panelCenter.Controls.Add(this.layoutRight);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelCenter.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelCenter.Location = new System.Drawing.Point(666, 0);
+            this.panelCenter.Location = new System.Drawing.Point(666, 39);
             this.panelCenter.Margin = new System.Windows.Forms.Padding(2);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(285, 782);
+            this.panelCenter.Size = new System.Drawing.Size(285, 743);
             this.panelCenter.TabIndex = 76;
             this.panelCenter.Visible = false;
             // 
@@ -297,12 +317,12 @@
             this.fastLavieIndex.GroupImageList = this.imageList32;
             this.fastLavieIndex.HideSelection = false;
             this.fastLavieIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastLavieIndex.Location = new System.Drawing.Point(540, 0);
+            this.fastLavieIndex.Location = new System.Drawing.Point(540, 39);
             this.fastLavieIndex.Margin = new System.Windows.Forms.Padding(2);
             this.fastLavieIndex.Name = "fastLavieIndex";
             this.fastLavieIndex.OwnerDraw = true;
             this.fastLavieIndex.ShowGroups = false;
-            this.fastLavieIndex.Size = new System.Drawing.Size(126, 782);
+            this.fastLavieIndex.Size = new System.Drawing.Size(126, 743);
             this.fastLavieIndex.TabIndex = 68;
             this.fastLavieIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastLavieIndex.UseCompatibleStateImageBehavior = false;
@@ -379,7 +399,7 @@
             this.dgvRepacks.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvRepacks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRepacks.EnableHeadersVisualStyles = false;
-            this.dgvRepacks.Location = new System.Drawing.Point(0, 0);
+            this.dgvRepacks.Location = new System.Drawing.Point(0, 39);
             this.dgvRepacks.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.dgvRepacks.Name = "dgvRepacks";
             this.dgvRepacks.ReadOnly = true;
@@ -393,7 +413,7 @@
             this.dgvRepacks.RowTemplate.Height = 24;
             this.dgvRepacks.RowTemplate.ReadOnly = true;
             this.dgvRepacks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvRepacks.Size = new System.Drawing.Size(540, 782);
+            this.dgvRepacks.Size = new System.Drawing.Size(540, 743);
             this.dgvRepacks.TabIndex = 77;
             // 
             // LineIndex
@@ -598,8 +618,10 @@
         private System.Windows.Forms.ToolStripButton buttonStart;
         private System.Windows.Forms.ToolStripButton buttonStop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel labelProgress;
+        private System.Windows.Forms.ToolStripLabel progressStatus;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel connectStatus;
+        private System.Windows.Forms.ToolStripLabel cycleStatus;
 
     }
 }

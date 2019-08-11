@@ -33,6 +33,7 @@ namespace TotalBase
 
         public const char charSTX = (char)02;//char.ConvertFromUtf32(02);//02H
         public const char charETX = (char)03;//char.ConvertFromUtf32(03);//03H
+        public const char charETB = (char)23;//char.ConvertFromUtf32(23);//17H End of Transmission Block
         //public const char charTAB = (char)09;
         public const string charTAB = "<HT>";
 
